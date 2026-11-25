@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MeetMage_SecurityHealthCheck::report" title="Security Health Check" translate="title"
+             module="MeetMage_SecurityHealthCheck" sortOrder="65" parent="Magento_Backend::system_other_settings"
+             action="meetmage_shc/report/index" resource="MeetMage_SecurityHealthCheck::report"/>
+    </menu>
+</config>

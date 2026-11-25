@@ -1,0 +1,30 @@
+<!--@subject {{var subject_prefix}}Security Health Check: score {{var score}}/100, {{var issues}} issue(s) to fix @-->
+<!--@vars {
+"var subject_prefix":"CRITICAL: when a critical issue is open",
+"var score":"Health score 0-100",
+"var issues":"Number of issues",
+"var critical":"Critical issues",
+"var high":"High issues",
+"var store_url":"Store URL",
+"var findings_html|raw":"Issue list",
+"var report_url":"Report page URL"
+} @-->
+<div style="font-family:Arial,Helvetica,sans-serif;color:#111827;max-width:760px">
+    <h1 style="font-size:20px;margin:0 0 12px">Security Health Check</h1>
+    <p style="margin:0 0 16px">
+        Store: {{var store_url}}<br>
+        Health score: <strong>{{var score}}/100</strong>,
+        {{var issues}} issue(s) to fix ({{var critical}} critical, {{var high}} high).
+    </p>
+    {{var findings_html|raw}}
+    <p style="margin:20px 0">
+        <a href="{{var report_url}}"
+           style="background:#1d4ed8;color:#ffffff;padding:10px 16px;border-radius:6px;text-decoration:none">
+            Open the full report
+        </a>
+    </p>
+    <p style="font-size:12px;color:#6b7280">
+        Sent by the free MeetMage Security Health Check extension.
+        Change recipients and frequency under Stores &gt; Configuration &gt; MeetMage &gt; Security Health Check.
+    </p>
+</div>

@@ -1,0 +1,125 @@
+/* MeetMage Security Health Check: admin report page */
+.mm-shc {
+    max-width: 1100px;
+}
+.mm-shc-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.mm-shc-score {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid #d1d5db;
+}
+.mm-shc-score strong {
+    font-size: 34px;
+    line-height: 1;
+}
+.mm-shc-score span {
+    font-size: 12px;
+    color: #6b7280;
+}
+.mm-shc-score.good {
+    border-color: #15803d;
+}
+.mm-shc-score.fair {
+    border-color: #d97706;
+}
+.mm-shc-score.poor {
+    border-color: #b91c1c;
+}
+.mm-shc-counts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 12px;
+}
+.mm-shc-pill {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f3f4f6;
+}
+.mm-shc-sev-critical {
+    background: #fee2e2;
+    color: #991b1b;
+}
+.mm-shc-sev-high {
+    background: #ffedd5;
+    color: #9a3412;
+}
+.mm-shc-sev-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+.mm-shc-sev-low {
+    background: #e5e7eb;
+    color: #374151;
+}
+.mm-shc-sev-passed {
+    background: #dcfce7;
+    color: #166534;
+}
+.mm-shc-sev-info {
+    background: #e0f2fe;
+    color: #075985;
+}
+.mm-shc h2 {
+    font-size: 18px;
+    margin: 28px 0 10px;
+}
+.mm-shc-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+.mm-shc-item h3 {
+    font-size: 15px;
+    margin: 0 0 6px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.mm-shc-item p {
+    margin: 4px 0;
+}
+.mm-shc-fix {
+    color: #1f2937;
+}
+.mm-shc-fix b {
+    color: #111827;
+}
+.mm-shc-code {
+    font-family: monospace;
+    font-size: 11px;
+    color: #9ca3af;
+}
+.mm-shc-passed li {
+    margin: 4px 0;
+}
+.mm-shc-note {
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 24px;
+}
+.mm-shc-run {
+    display: inline;
+}
+.mm-shc-settings {
+    margin-left: 8px;
+}
+.mm-shc-muted {
+    color: #6b7280;
+}

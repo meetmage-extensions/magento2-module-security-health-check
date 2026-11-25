@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Short names for the checks (keeps the lists below readable) -->
+    <virtualType name="MeetMageShcMagento" type="MeetMage\SecurityHealthCheck\Model\Check\MagentoVersion"/>
+    <virtualType name="MeetMageShcPhp" type="MeetMage\SecurityHealthCheck\Model\Check\PhpVersion"/>
+    <virtualType name="MeetMageShcPackages" type="MeetMage\SecurityHealthCheck\Model\Check\ComposerPackages"/>
+    <virtualType name="MeetMageShcHardening" type="MeetMage\SecurityHealthCheck\Model\Check\Hardening"/>
+
+    <!-- The checks that make up the report. Add your own CheckInterface implementations here. -->
+    <type name="MeetMage\SecurityHealthCheck\Model\Scanner">
+        <arguments>
+            <argument name="checks" xsi:type="array">
+                <item name="magento_version" xsi:type="object">MeetMageShcMagento</item>
+                <item name="php_version" xsi:type="object">MeetMageShcPhp</item>
+                <item name="composer_packages" xsi:type="object">MeetMageShcPackages</item>
+                <item name="hardening" xsi:type="object">MeetMageShcHardening</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- CLI: bin/magento meetmage:security:check (dependencies load only when the command runs) -->
+    <type name="MeetMage\SecurityHealthCheck\Console\Command\CheckCommand">
+        <arguments>
+            <argument name="scanner" xsi:type="object">MeetMage\SecurityHealthCheck\Model\Scanner\Proxy</argument>
+            <argument name="notifier" xsi:type="object">MeetMage\SecurityHealthCheck\Model\Notifier\Proxy</argument>
+        </arguments>
+    </type>
+    <virtualType name="MeetMageShcCheckCommand" type="MeetMage\SecurityHealthCheck\Console\Command\CheckCommand"/>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="meetmage_shc_check" xsi:type="object">MeetMageShcCheckCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Short name for the report page view model (used in layout XML) -->
+    <virtualType name="MeetMageShcReportView" type="MeetMage\SecurityHealthCheck\ViewModel\ReportView"/>
+</config>

@@ -1,0 +1,122 @@
+<?php
+/**
+ * Security Health Check report page.
+ *
+ * @var \Magento\Backend\Block\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \MeetMage\SecurityHealthCheck\ViewModel\ReportView $view
+ */
+$view = $block->getData('view_model');
+$report = $view->getReport();
+?>
+<div class="mm-shc">
+    <div class="mm-shc-head">
+        <?php if ($report): ?>
+            <?php $score = $report->getScore(); ?>
+            <div class="mm-shc-score <?= $escaper->escapeHtmlAttr($view->getScoreClass($score)) ?>">
+                <strong><?= (int) $score ?></strong>
+                <span><?= $escaper->escapeHtml(__('of 100')) ?></span>
+            </div>
+        <?php endif; ?>
+        <div>
+            <?php if ($report): ?>
+                <?php $counts = $report->countBySeverity(); ?>
+                <div class="mm-shc-counts">
+                    <?php foreach (['critical', 'high', 'medium', 'low', 'passed'] as $severity): ?>
+                        <span class="mm-shc-pill mm-shc-sev-<?= $escaper->escapeHtmlAttr($severity) ?>">
+                            <?= (int) $counts[$severity] ?>
+                            <?= $escaper->escapeHtml($view->getSeverityLabel($severity)) ?>
+                        </span>
+                    <?php endforeach; ?>
+                </div>
+                <p><?= $escaper->escapeHtml(__('Last checked: %1', $view->formatTime($report->getCreatedAt()))) ?></p>
+            <?php else: ?>
+                <?php $first = __('No check has run yet. Run the first check now; after that it runs every day.'); ?>
+                <p><?= $escaper->escapeHtml($first) ?></p>
+            <?php endif; ?>
+            <form class="mm-shc-run" method="post" action="<?= $escaper->escapeUrl($view->getRunUrl()) ?>">
+                <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
+                <button type="submit" class="action-primary">
+                    <span><?= $escaper->escapeHtml(__('Run check now')) ?></span>
+                </button>
+            </form>
+            <a class="action-secondary mm-shc-settings" href="<?= $escaper->escapeUrl($view->getSettingsUrl()) ?>">
+                <?= $escaper->escapeHtml(__('Settings')) ?>
+            </a>
+        </div>
+    </div>
+
+    <?php if ($report): ?>
+        <?php $issueGroups = $view->getGroups(true); ?>
+        <?php if (!$issueGroups): ?>
+            <div class="message message-success">
+                <div><?= $escaper->escapeHtml(__('No issues found. Nice work!')) ?></div>
+            </div>
+        <?php endif; ?>
+        <?php foreach ($issueGroups as $category => $findings): ?>
+            <h2><?= $escaper->escapeHtml($view->getCategoryLabel($category)) ?></h2>
+            <?php foreach ($findings as $finding): ?>
+                <?php $severity = $finding->getSeverity(); ?>
+                <div class="mm-shc-item">
+                    <h3>
+                        <span class="mm-shc-pill mm-shc-sev-<?= $escaper->escapeHtmlAttr($severity) ?>">
+                            <?= $escaper->escapeHtml($view->getSeverityLabel($severity)) ?>
+                        </span>
+                        <?= $escaper->escapeHtml($finding->getTitle()) ?>
+                    </h3>
+                    <?php if ($finding->getDetail()): ?>
+                        <p><?= $escaper->escapeHtml($finding->getDetail()) ?></p>
+                    <?php endif; ?>
+                    <?php if ($finding->getFix()): ?>
+                        <p class="mm-shc-fix">
+                            <b><?= $escaper->escapeHtml(__('How to fix:')) ?></b>
+                            <?= $escaper->escapeHtml($finding->getFix()) ?>
+                        </p>
+                    <?php endif; ?>
+                    <?php if ($finding->getLink()): ?>
+                        <p>
+                            <a href="<?= $escaper->escapeUrl($finding->getLink()) ?>"
+                               target="_blank" rel="noopener noreferrer">
+                                <?= $escaper->escapeHtml(__('More information')) ?>
+                            </a>
+                        </p>
+                    <?php endif; ?>
+                    <p class="mm-shc-code"><?= $escaper->escapeHtml($finding->getCode()) ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+
+        <?php $okGroups = $view->getGroups(false); ?>
+        <?php if ($okGroups): ?>
+            <h2><?= $escaper->escapeHtml(__('Passed and informational')) ?></h2>
+            <ul class="mm-shc-passed">
+                <?php foreach ($okGroups as $findings): ?>
+                    <?php foreach ($findings as $finding): ?>
+                        <?php $severity = $finding->getSeverity(); ?>
+                        <li>
+                            <span class="mm-shc-pill mm-shc-sev-<?= $escaper->escapeHtmlAttr($severity) ?>">
+                                <?= $escaper->escapeHtml($view->getSeverityLabel($severity)) ?>
+                            </span>
+                            <?= $escaper->escapeHtml($finding->getTitle()) ?>
+                            <?php if ($finding->getDetail()): ?>
+                                <span class="mm-shc-muted">: <?= $escaper->escapeHtml($finding->getDetail()) ?></span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <p class="mm-shc-note">
+        <?php if ($view->isExternalLookupAllowed()): ?>
+            <?= $escaper->escapeHtml(__(
+                'Version data comes from Packagist (security advisories), endoflife.date and the Magento release '
+                . 'feed. Only package names are sent; your installed versions stay on this server.'
+            )) ?>
+        <?php else: ?>
+            <?= $escaper->escapeHtml(__('Public lookups are off, so version and vulnerability checks are skipped.')) ?>
+        <?php endif; ?>
+        <?= $escaper->escapeHtml(__('To hide a finding, add its code to "Ignored checks" in the settings.')) ?>
+    </p>
+</div>

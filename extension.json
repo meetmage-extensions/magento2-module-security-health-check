@@ -1,0 +1,72 @@
+{
+    "name": "Security Health Check",
+    "slug": "security-health-check",
+    "version": "1.0.0",
+    "released": null,
+    "packagist": "meetmage/module-security-health-check",
+    "description": "A daily security check in your Magento admin: end-of-life and unpatched Magento or PHP versions, Composer packages with known vulnerabilities, and risky admin and configuration settings, each with a plain-English fix. Score out of 100, admin notice, email report and a CLI command for deployment pipelines.",
+    "shortDescription": "Daily Magento security check: outdated versions, vulnerable packages and risky settings",
+    "category": "admin-security",
+    "icon": "shield",
+    "features": [
+        {
+            "icon": "clock",
+            "title": "Outdated and end-of-life versions",
+            "text": "Tells you when your Magento release line or PHP version stops getting security fixes, and when a newer security patch for your version is out."
+        },
+        {
+            "icon": "search",
+            "title": "Known vulnerabilities, matched to your exact version",
+            "text": "Checks your Magento version and every Composer package against the Packagist security advisory database, with the CVE, severity and the command to fix it."
+        },
+        {
+            "icon": "shield",
+            "title": "Admin hardening (PCI DSS 8.x)",
+            "text": "Two-factor authentication, a custom admin URL, no 'admin' username, lockout after failed logins, 15-minute sessions, CAPTCHA and secret keys in admin URLs."
+        },
+        {
+            "icon": "settings",
+            "title": "Risky configuration",
+            "text": "Production mode, HTTPS on every store view, Content Security Policy, template hints and cron health."
+        },
+        {
+            "icon": "chart",
+            "title": "Score, admin notice and email report",
+            "text": "A health score out of 100 with a fix for every issue, an admin notice for serious problems, and an email when something new appears plus a weekly or daily summary."
+        },
+        {
+            "icon": "code",
+            "title": "Private by design, CI friendly",
+            "text": "Only package names are sent to public data sources; versions and settings stay on your server. bin/magento meetmage:security:check --fail-on=high can stop a deployment."
+        }
+    ],
+    "compatibility": {
+        "magento": [
+            "2.4.6",
+            "2.4.7",
+            "2.4.8",
+            "2.4.9"
+        ],
+        "php": [
+            "8.1",
+            "8.2",
+            "8.3",
+            "8.4",
+            "8.5"
+        ],
+        "hyva": true,
+        "hyvaVersion": "(any version)"
+    },
+    "tags": [
+        "security",
+        "pci-dss",
+        "security-patches",
+        "composer-audit",
+        "end-of-life",
+        "magento2"
+    ],
+    "testedOn": "2.4.9",
+    "images": [],
+    "documentation": "https://github.com/meetmage-extensions/magento2-module-security-health-check#readme",
+    "status": "in-development"
+}

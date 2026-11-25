@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="meetmage" translate="label" sortOrder="400">
+            <label>MeetMage</label>
+        </tab>
+        <section id="meetmage_securityhealthcheck" translate="label" sortOrder="30" showInDefault="1">
+            <class>separator-top</class>
+            <label>Security Health Check</label>
+            <tab>meetmage</tab>
+            <resource>MeetMage_SecurityHealthCheck::config</resource>
+            <group id="general" translate="label comment" sortOrder="10" showInDefault="1">
+                <label>General</label>
+                <comment><![CDATA[The report is under System &gt; Other Settings &gt;
+                    Security Health Check.]]></comment>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1">
+                    <label>Run Daily Check</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Runs once a day by cron. You can also run it from the report page or with
+                        bin/magento meetmage:security:check.</comment>
+                </field>
+                <field id="external_lookups" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1">
+                    <label>Look Up Public Security Data</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Reads Packagist security advisories, endoflife.date and the Magento release feed.
+                        Only package names are sent; installed versions stay on your server. Without it, only
+                        configuration checks run.</comment>
+                </field>
+                <field id="release_feed_url" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1">
+                    <label>Magento Release Feed</label>
+                    <comment>Composer metadata that lists Magento Open Source releases. Leave empty to use the
+                        public Mage-OS mirror. Must start with https://.</comment>
+                    <depends>
+                        <field id="external_lookups">1</field>
+                    </depends>
+                </field>
+                <field id="ignored_checks" translate="label comment" type="textarea" sortOrder="40"
+                       showInDefault="1">
+                    <label>Ignored Checks</label>
+                    <comment>Finding codes to hide, one per line (shown in small grey text under each finding).
+                        End with * to ignore a group, e.g. packages.advisories.vendor/*</comment>
+                </field>
+            </group>
+            <group id="email" translate="label" sortOrder="20" showInDefault="1">
+                <label>Email Report</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Send Email Report</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="frequency" translate="label comment" type="select" sortOrder="20" showInDefault="1">
+                    <label>When to Send</label>
+                    <source_model>MeetMage\SecurityHealthCheck\Model\Source\Frequency</source_model>
+                    <comment>New medium, high or critical issues are always emailed right after the daily
+                        check.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="recipients" translate="label comment" type="text" sortOrder="30" showInDefault="1">
+                    <label>Send To</label>
+                    <comment>One or more email addresses, separated by commas.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="identity" translate="label" type="select" sortOrder="40" showInDefault="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="template" translate="label" type="select" sortOrder="50" showInDefault="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

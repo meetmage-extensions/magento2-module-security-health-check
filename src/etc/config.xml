@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <meetmage_securityhealthcheck>
+            <general>
+                <enabled>1</enabled>
+                <external_lookups>1</external_lookups>
+            </general>
+            <email>
+                <enabled>0</enabled>
+                <frequency>weekly</frequency>
+                <identity>general</identity>
+                <template>meetmage_securityhealthcheck_email_template</template>
+            </email>
+        </meetmage_securityhealthcheck>
+    </default>
+</config>
