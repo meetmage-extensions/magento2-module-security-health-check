@@ -6,6 +6,8 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-25
+
 ### Added
 - Daily security health check with a 0-100 score, admin report page (System > Other Settings > Security Health
   Check), "Run check now" button and an admin notice for critical and high issues.

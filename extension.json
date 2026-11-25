@@ -2,7 +2,7 @@
     "name": "Security Health Check",
     "slug": "security-health-check",
     "version": "1.0.0",
-    "released": null,
+    "released": "2026-11-25",
     "packagist": "meetmage/module-security-health-check",
     "description": "A daily security check in your Magento admin: end-of-life and unpatched Magento or PHP versions, Composer packages with known vulnerabilities, and risky admin and configuration settings, each with a plain-English fix. Score out of 100, admin notice, email report and a CLI command for deployment pipelines.",
     "shortDescription": "Daily Magento security check: outdated versions, vulnerable packages and risky settings",
@@ -89,5 +89,5 @@
         }
     ],
     "documentation": "https://github.com/meetmage-extensions/magento2-module-security-health-check#readme",
-    "status": "in-development"
+    "status": "released"
 }
