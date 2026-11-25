@@ -1,6 +1,7 @@
 # Keep dev-only files out of "composer require" installs
 /.github export-ignore
 /tests export-ignore
+/docs export-ignore
 /phpunit.xml.dist export-ignore
 /phpstan.neon.dist export-ignore
 /extension.json export-ignore
