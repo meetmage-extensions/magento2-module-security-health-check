@@ -1,5 +1,7 @@
 # Security Health Check for Magento 2
 
+![Security Health Check for Magento 2](docs/images/hero.webp)
+
 A free security check for your Magento store. One page in the admin and a regular email tell you whether your
 **Magento and PHP versions still get security fixes**, whether the **latest security patch** is installed, which
 **Composer packages (extensions and libraries) have known vulnerabilities**, and which **admin and

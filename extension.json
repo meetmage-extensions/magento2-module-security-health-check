@@ -66,7 +66,28 @@
         "magento2"
     ],
     "testedOn": "2.4.9",
-    "images": [],
+    "images": [
+        {
+            "src": "docs/images/hero.webp",
+            "alt": "Security Health Check for Magento 2: a daily security score for your store"
+        },
+        {
+            "src": "docs/images/version-check.webp",
+            "alt": "Warns when your Magento or PHP version is out of date or end of life"
+        },
+        {
+            "src": "docs/images/package-scan.webp",
+            "alt": "Scans every Composer package for known security vulnerabilities"
+        },
+        {
+            "src": "docs/images/admin-hardening.webp",
+            "alt": "Checks admin security: two-factor login, lockout, session timeout and more"
+        },
+        {
+            "src": "docs/images/email-report.webp",
+            "alt": "Email report, admin notice and a CLI command for deployment pipelines"
+        }
+    ],
     "documentation": "https://github.com/meetmage-extensions/magento2-module-security-health-check#readme",
     "status": "in-development"
 }
