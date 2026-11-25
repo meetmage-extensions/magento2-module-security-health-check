@@ -15,7 +15,7 @@ configuration settings** leave the store open to attack, with a plain-English fi
 
 ## Why
 
-Most hacked Magento stores were running a version with a known, already fixed vulnerability, or an extension
+Many hacked Magento stores were running a version with a known, already fixed vulnerability, or an extension
 with one. `composer audit` and Adobe's security bulletins can tell you, but only if someone remembers to look.
 This module looks every day and tells you in the admin and by email.
 
